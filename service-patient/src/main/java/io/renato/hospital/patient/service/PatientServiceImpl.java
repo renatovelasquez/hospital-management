@@ -26,17 +26,23 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient createPatient(Patient patient) {
-        patient.setFechaCreacion(new Date());
-        patient.setUsuarioCreador("CREATED");
+        patient.setCreatedAt(new Date());
+        patient.setCreatedBy("CREATED");
         return patientRepository.save(patient);
     }
 
     @Override
     public Patient updatePatient(Patient patient) {
-        if (patient != null) {
-            patient.setFechaModificacion(new Date());
-            patient.setUsuarioModificador("UPDATED");
-            return patientRepository.save(patient);
+        Patient foundPatient = patientRepository.findById(patient.getId()).orElse(null);
+        if (foundPatient != null) {
+            foundPatient.setName(patient.getName());
+            foundPatient.setLastName(patient.getLastName());
+            foundPatient.setBirthDate(patient.getBirthDate());
+            foundPatient.setAddress(patient.getAddress());
+            foundPatient.setPhoto(patient.getPhoto());
+            foundPatient.setUpdatedAt(new Date());
+            foundPatient.setUpdatedBy("UPDATED");
+            return patientRepository.save(foundPatient);
         }
         return null;
     }

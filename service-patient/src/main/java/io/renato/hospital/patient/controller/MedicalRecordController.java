@@ -1,10 +1,9 @@
 package io.renato.hospital.patient.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.renato.hospital.patient.entity.MedicalRecord;
 import io.renato.hospital.patient.entity.Patient;
 import io.renato.hospital.patient.service.MedicalRecordService;
+import io.renato.hospital.patient.utils.FormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/records")
@@ -51,7 +47,7 @@ public class MedicalRecordController {
     @PostMapping
     public ResponseEntity<MedicalRecord> createMedicalRecord(@RequestBody @Valid MedicalRecord record, BindingResult result) {
         if (result.hasErrors())
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, FormatUtils.formatMessage(result));
         MedicalRecord recordCreate = medicalRecordService.createRecord(record);
         return ResponseEntity.status(HttpStatus.CREATED).body(recordCreate);
     }
@@ -59,7 +55,7 @@ public class MedicalRecordController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<MedicalRecord> updateMedicalRecord(@PathVariable("id") Long id, @RequestBody MedicalRecord record) {
         record.setId(id);
-        MedicalRecord recordDB = medicalRecordService.updateRecord(record);
+        MedicalRecord recordDB = medicalRecordService.updateMedicalRecord(record);
         if (recordDB != null)
             return ResponseEntity.ok(recordDB);
         return ResponseEntity.notFound().build();
@@ -83,21 +79,4 @@ public class MedicalRecordController {
 //        return ResponseEntity.ok(record);
 //    }
 
-    private String formatMessage(BindingResult result) {
-        List<Map<String, String>> errors = result.getFieldErrors().stream()
-                .map(err -> {
-                    Map<String, String> error = new HashMap<>();
-                    error.put(err.getField(), err.getDefaultMessage());
-                    return error;
-                }).collect(Collectors.toList());
-        ErrorMessage errorMessage = ErrorMessage.builder().code("01").messages(errors).build();
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonString = "";
-        try {
-            jsonString = mapper.writeValueAsString(errorMessage);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return jsonString;
-    }
 }

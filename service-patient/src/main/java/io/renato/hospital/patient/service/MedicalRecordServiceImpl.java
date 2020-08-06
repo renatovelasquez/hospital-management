@@ -27,17 +27,20 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
 
     @Override
     public MedicalRecord createRecord(MedicalRecord record) {
-        record.setFechaCreacion(new Date());
-        record.setUsuarioCreador("CREATED");
+        record.setCreatedAt(new Date());
+        record.setCreatedBy("CREATED");
         return medicalRecordRepository.save(record);
     }
 
     @Override
-    public MedicalRecord updateRecord(MedicalRecord record) {
-        if (record != null) {
-            record.setFechaModificacion(new Date());
-            record.setUsuarioModificador("UPDATED");
-            return medicalRecordRepository.save(record);
+    public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) {
+        MedicalRecord foundMedicalRecord = medicalRecordRepository.findById(medicalRecord.getId()).orElse(null);
+        if (foundMedicalRecord != null) {
+            foundMedicalRecord.setDescription(medicalRecord.getDescription());
+            foundMedicalRecord.setRecordDate(medicalRecord.getRecordDate());
+            foundMedicalRecord.setUpdatedAt(new Date());
+            foundMedicalRecord.setUpdatedBy("UPDATED");
+            return medicalRecordRepository.save(foundMedicalRecord);
         }
         return null;
     }
@@ -45,7 +48,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Override
     public void deleteRecord(Long id) {
         if (id != null) {
-            medicalRecordRepository.findById(id).ifPresent(patient -> medicalRecordRepository.delete(patient));
+            medicalRecordRepository.findById(id).ifPresent(medicalRecord -> medicalRecordRepository.delete(medicalRecord));
         }
     }
 

@@ -11,70 +11,56 @@ import java.util.Date;
 public class EntityBase implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "fecha_creacion")
+    @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    protected Date fechaCreacion;
-    @Column(name = "usuario_creador")
-    protected String usuarioCreador;
-    @Column(name = "fecha_modificacion")
+    protected Date createdAt;
+    @Column(name = "created_by")
+    protected String createdBy;
+    @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
-    protected Date fechaModificacion;
-    @Column(name = "usuario_modificador")
-    protected String usuarioModificador;
+    protected Date updatedAt;
+    @Column(name = "updated_by")
+    protected String updatedBy;
 
-    public Date getFechaCreacion() {
-        if (fechaCreacion == null) {
-            return null;
-        }
-        return new Date(fechaCreacion.getTime());
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
-        if (fechaCreacion == null) {
-            this.fechaCreacion = null;
-        } else {
-            this.fechaCreacion = new Date(fechaCreacion.getTime());
-        }
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Date getFechaModificacion() {
-        if (fechaModificacion == null) {
-            return null;
-        }
-        return new Date(fechaModificacion.getTime());
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setFechaModificacion(Date fechaModificacion) {
-        if (fechaModificacion == null) {
-            this.fechaModificacion = null;
-        } else {
-            this.fechaModificacion = new Date(fechaModificacion.getTime());
-        }
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
-    public String getUsuarioCreador() {
-        return usuarioCreador;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUsuarioCreador(String usuarioCreador) {
-        this.usuarioCreador = usuarioCreador;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
-    public String getUsuarioModificador() {
-        return usuarioModificador;
+    public String getUpdatedBy() {
+        return updatedBy;
     }
 
-    public void setUsuarioModificador(String usuarioModificador) {
-        this.usuarioModificador = usuarioModificador;
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
     }
 
     @Override
-    public String toString() {
+    public String                                                                                                                                                 toString() {
         return "EntityBase{" +
-                "fechaCreacion=" + fechaCreacion +
-                ", usuarioCreador='" + usuarioCreador + '\'' +
-                ", fechaModificacion=" + fechaModificacion +
-                ", usuarioModificador='" + usuarioModificador + '\'' +
+                "createdAt=" + createdAt +
+                ", createdBy='" + createdBy + '\'' +
+                ", updatedAt=" + updatedAt +
+                ", updatedBy='" + updatedBy + '\'' +
                 '}';
     }
 }

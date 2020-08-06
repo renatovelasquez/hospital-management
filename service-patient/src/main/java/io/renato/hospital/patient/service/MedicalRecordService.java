@@ -12,7 +12,7 @@ public interface MedicalRecordService {
 
     MedicalRecord createRecord(MedicalRecord record);
 
-    MedicalRecord updateRecord(MedicalRecord record);
+    MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord);
 
     void deleteRecord(Long id);
 
