@@ -1,6 +1,7 @@
 package io.renato.hospital.patient.service;
 
 import io.renato.hospital.patient.entity.MedicalRecord;
+import io.renato.hospital.patient.entity.Patient;
 import io.renato.hospital.patient.repository.MedicalRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,10 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
         if (id != null) {
             medicalRecordRepository.findById(id).ifPresent(patient -> medicalRecordRepository.delete(patient));
         }
+    }
+
+    @Override
+    public List<MedicalRecord> finByPatient(Patient patient) {
+        return medicalRecordRepository.findByPatient(patient);
     }
 }

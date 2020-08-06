@@ -1,6 +1,7 @@
 package io.renato.hospital.patient.service;
 
 import io.renato.hospital.patient.entity.MedicalRecord;
+import io.renato.hospital.patient.entity.Patient;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface MedicalRecordService {
     MedicalRecord updateRecord(MedicalRecord record);
 
     void deleteRecord(Long id);
+
+    List<MedicalRecord> finByPatient(Patient patient);
 }
