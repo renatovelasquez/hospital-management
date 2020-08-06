@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -71,5 +73,21 @@ public class HospitalController {
         if (hospitals.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok(hospitals);
+    }
+
+    @GetMapping(value = "/created")
+    public ResponseEntity<List<Hospital>> listHospitalByCreatedAt(@RequestParam(name = "date") String date) {
+        try {
+            Date date1 = new SimpleDateFormat("yyyyMMdd").parse(date);
+            List<Hospital> hospitals = new ArrayList<>();
+            if (date1 != null)
+                hospitals = hospitalService.findByCreatedAt(date1);
+            if (hospitals.isEmpty())
+                return ResponseEntity.noContent().build();
+            return ResponseEntity.ok(hospitals);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
