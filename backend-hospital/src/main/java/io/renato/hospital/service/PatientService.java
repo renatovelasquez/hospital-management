@@ -2,6 +2,7 @@ package io.renato.hospital.service;
 
 import io.renato.hospital.entity.Patient;
 
+import java.util.Date;
 import java.util.List;
 
 public interface PatientService {
@@ -15,7 +16,7 @@ public interface PatientService {
 
     void deletePatient(Long id);
 
-//    List<Patient> findBySpeciality(Speciality speciality);
+    List<Patient> findByNameOrLastname(String name, String lastname);
 
-//    public Patient updateStock(Long id, Double quantity);
+    List<Patient> findByBirth(Date date);
 }

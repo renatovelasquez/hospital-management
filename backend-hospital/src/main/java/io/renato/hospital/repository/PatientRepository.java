@@ -12,8 +12,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     List<Patient> findByBirthDate(Date date);
 
-    List<Patient> findByNameContains(String name);
-
-    List<Patient> findByLastNameContains(String lastName);
+    List<Patient> findByNameContainsOrLastNameContains(String name, String lastname);
 
 }

@@ -54,8 +54,13 @@ public class PatientServiceImpl implements PatientService {
         }
     }
 
-//    @Override
-//    public List<Patient> findBySpeciality(Speciality speciality) {
-//        return patientRepository.findBySpeciality(speciality);
-//    }
+    @Override
+    public List<Patient> findByNameOrLastname(String name, String lastname) {
+        return patientRepository.findByNameContainsOrLastNameContains(name, lastname);
+    }
+
+    @Override
+    public List<Patient> findByBirth(Date date) {
+        return patientRepository.findByBirthDate(date);
+    }
 }

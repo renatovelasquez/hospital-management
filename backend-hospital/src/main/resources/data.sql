@@ -17,12 +17,12 @@ INSERT INTO tbl_speciality (id, name, description, avatar) VALUES (1, 'Otorrinol
 INSERT INTO tbl_speciality (id, name, description, avatar) VALUES (2, 'Neurologia', 'Trata los trastornos del sistema nervioso. Específicamente se ocupa de la prevención, diagnóstico, tratamiento y rehabilitación de todas las enfermedades que involucran al sistema nervioso central, periférico y el autónomo.', 'http://dummyimage.com/228x184.png/5fa2dd/ffffff');
 INSERT INTO tbl_speciality (id, name, description, avatar) VALUES (3, 'Cardiologia', 'Se encarga del estudio, diagnóstico y tratamiento de las enfermedades del corazón y del aparato circulatorio. Es médica, pero no quirúrgica.', 'http://dummyimage.com/115x230.png/5fa2dd/ffffff');
 
-insert into tbl_doctor_speciality (doctor_id, speciality_id) values (3, 1);
+insert into tbl_doctor_speciality (doctor_id, speciality_id) values (1, 1);
 insert into tbl_doctor_speciality (doctor_id, speciality_id) values (1, 2);
+insert into tbl_doctor_speciality (doctor_id, speciality_id) values (1, 3);
 insert into tbl_doctor_speciality (doctor_id, speciality_id) values (2, 1);
 insert into tbl_doctor_speciality (doctor_id, speciality_id) values (2, 3);
-insert into tbl_doctor_speciality (doctor_id, speciality_id) values (1, 2);
-insert into tbl_doctor_speciality (doctor_id, speciality_id) values (1, 2);
+insert into tbl_doctor_speciality (doctor_id, speciality_id) values (3, 2);
 
 insert into tbl_patient (id, name, last_name, birth_date, address, photo) values (1, 'Sibley', 'Challace', '1980-09-11', '103 Arrowood Way', 'http://dummyimage.com/148x100.bmp/dddddd/000000');
 insert into tbl_patient (id, name, last_name, birth_date, address, photo) values (2, 'Guido', 'Royall', '1995-09-20', '697 Ridgeway Pass', 'http://dummyimage.com/230x215.png/dddddd/000000');
